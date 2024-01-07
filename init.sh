@@ -12,3 +12,6 @@ sheldon init --shell zsh
 link zsh/zprofile.zsh ~/.zprofile
 link zsh/zshrc.zsh ~/.zshrc
 link zsh/plugins.toml ~/.config/sheldon/plugins.toml
+
+# starship 
+link starship/starship.toml ~/.config/starship.toml

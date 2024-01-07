@@ -1,0 +1,9 @@
+command_timeout = 1000
+scan_timeout = 10
+
+[directory]
+truncation_length = 50
+truncate_to_repo = false
+
+[docker_context]
+format = "via [🐋 $context](blue bold)"
