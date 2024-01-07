@@ -24,10 +24,16 @@ defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file 
 # [plugins.base16]
 # github = "chriskempson/base16-shell"
 
-#[plugins.dotfiles-sync]
+[plugins.dotfiles-sync]
+local = '~/dotfiles/zsh/sync'
+use = ['*.zsh']
+apply = ['source']
 
 
 [plugins.dotfiles-defer]
 local = '~/dotfiles/zsh/defer'
 use = ['*.zsh']
 apply = ['defer']
+
+[plugins.starship]
+inline = 'eval "$(starship init zsh)"'
