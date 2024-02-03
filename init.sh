@@ -15,3 +15,7 @@ link zsh/plugins.toml ~/.config/sheldon/plugins.toml
 
 # starship 
 link starship/starship.toml ~/.config/starship.toml
+
+# tmux
+link tmux/tmux.conf ~/.tmux.conf
+
