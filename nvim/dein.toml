@@ -1,0 +1,332 @@
+[[plugins]]
+repo = 'Shougo/pum.vim'
+
+############################################################
+# Lua 
+#   local = require('~~')ができるようになるやつ
+############################################################
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+merged = 0
+
+############################################################
+# Filer
+############################################################
+# [[plugins]]
+# repo = 'preservim/nerdtree'
+# hook_add = '''
+#     nnoremap <C-m> :NERDTreeToggle<CR>
+#     nnoremap <Leader><C-m> :NERDTreeFind<CR>
+# '''
+
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+hook_add = '''
+  nnoremap <silent> <C-n> :Fern . -drawer -reveal=% -toggle -width=40<CR>
+  nnoremap <silent> <Leader><C-n> :Fern %:h -drawer -reveal=% -toggle -width=40<CR>
+'''
+
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+depends = 'lambdalisue/nerdfont.vim lambdalisue/fern.vim'
+hook_add = '''
+    let g:fern#renderer = 'nerdfont'
+'''
+############################################################
+# Icon
+############################################################
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+hook_add = '''
+    let g:webdevicons_enable_nerdtree = 1
+    let g:webdevicons_conceal_nerdtree_brackets = 1
+'''
+
+############################################################
+# Filnder
+# let g:fzf_vim.preview_window = ['up, 50%']
+############################################################
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --bin'
+merged = 0
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'junegunn/fzf'
+hook_add = '''
+    nnoremap <silent> <C-f> :Files<CR>
+    nnoremap <silent> <Leader>f :Ag<CR>
+    nnoremap <silent> <C-b> :Buffers<CR>
+    nnoremap <silent> <C-g> :GFiles?<CR>
+    nnoremap <silent> <C-h> :History<CR>
+'''
+
+############################################################
+# Statusline
+############################################################
+[[plugins]]
+repo = 'nvim-lualine/lualine.nvim'
+hook_add = '''
+    source ~/.config/nvim/lua/_status_line.lua
+'''
+
+############################################################
+# Colorscheme
+############################################################
+#[[plugins]]
+#repo = 'cocopon/iceberg.vim'
+#
+#[[plugins]]
+#repo = 'rebelot/kanagawa.nvim'
+#hook_add = '''
+#    source ~/.config/nvim/lua/colorscheme/_kanagawa.lua
+#'''
+
+[[plugins]]
+repo = 'marko-cerovac/material.nvim'
+hook_add = '''
+  source ~/.config/nvim/lua/colorscheme/_material.lua
+'''
+
+############################################################
+# Copilot
+############################################################
+[[plugins]]
+repo = 'github/copilot.vim'
+
+############################################################
+# LSP
+############################################################
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+merged = 0
+rev = 'release'
+hook_add = '''
+    let g:coc_global_extensions = [
+        \'coc-phpls',
+        \'coc-prettier',
+        \'coc-tsserver',
+        \'coc-json',
+        \'coc-docker',
+        \'coc-html',
+        \'coc-css',
+        \'coc-lua',
+        \'coc-toml',
+        \'coc-yaml',
+        \'coc-db',
+        \'coc-sql',
+    \]
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
+    nnoremap <silent><nowait> <space>o :call ToggleOutline()<CR>
+    function! ToggleOutline() abort
+      let winid = coc#window#find('cocViewId', 'OUTLINE')
+      if winid == -1
+        call CocActionAsync('showOutline', 1)
+      else
+        call coc#window#close(winid)
+      endif
+    endfunction
+'''
+
+############################################################
+# 補完
+############################################################
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
+
+[[plugins]]
+repo = 'windwp/nvim-ts-autotag'
+depends = 'nvim-treesitter/nvim-treesitter'
+
+############################################################
+# Debug
+############################################################
+[[plugins]]
+repo = 'mfussenegger/nvim-dap'
+hook_add = '''
+    source ~/.config/nvim/lua/_dap.lua
+'''
+
+[[plugins]]
+repo = 'rcarriga/nvim-dap-ui'
+hook_add = '''
+    noremap <silent> <Leader>n :lua require'dapui'.toggle({ reset = true })<CR>
+    source ~/.config/nvim/lua/_dapui.lua
+'''
+
+
+############################################################
+# DB
+############################################################
+[[plugins]]
+repo = 'tpope/vim-dadbod'
+
+[[plugins]]
+repo = 'kristijanhusak/vim-dadbod-ui'
+hook_add = '''
+  source ~/.config/nvim/lua/_dadbod.lua
+'''
+
+[[plugins]]
+repo = 'kristijanhusak/vim-dadbod-completion'
+
+############################################################
+# Git Lensみたいなやつ
+#   行ごとに直近の編集者・コミットが確認できる
+############################################################
+[[plugins]]
+repo = 'APZelos/blamer.nvim'
+hook_add = '''
+    noremap <silent><Leader><C-b> :BlamerToggle<CR>
+'''
+
+############################################################
+# Git系
+# 1.差分表示
+# 2. 便利なやつ
+############################################################
+[[plugins]]
+repo = 'lewis6991/gitsigns.nvim'
+hook_add = '''
+    source ~/.config/nvim/lua/_gitsigns.lua
+'''
+
+[[plugins]]
+repo = 'kdheepak/lazygit.nvim'
+hook_add = '''
+    source ~/.config/nvim/lua/_lazygit.lua
+    '''
+
+############################################################
+# Sticky Scroll
+############################################################
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+merged = 0
+hook_post_source = '''
+  source ~/.config/nvim/lua/_treesitter.lua
+'''
+
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter-context'
+hook_add = '''
+    source ~/.config/nvim/lua/_treesitter-context.lua
+'''
+
+
+############################################################
+# Toggle Term
+############################################################
+[[plugins]]
+repo = 'akinsho/toggleterm.nvim'
+hook_add = '''
+    source ~/.config/nvim/lua/_toggleterm.lua
+    '''
+
+############################################################
+# Smooth Scroll
+############################################################
+[[plugins]]
+repo = 'karb94/neoscroll.nvim'
+hook_add = '''
+  source ~/.config/nvim/lua/_neoscroll.lua
+  '''
+
+############################################################
+# Multi Cursor
+############################################################
+# [[plugins]]
+# repo = 'mg979/vim-visual-multi'
+# hook_add = '''
+
+#   '''
+
+############################################################
+# Commentout
+############################################################
+[[plugins]]
+repo = 'tpope/vim-commentary'
+
+############################################################
+# ALE
+############################################################
+# [[plugins]]
+# repo = 'dense-analysis/ale'
+
+############################################################
+# Easy Align
+############################################################
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+hook_add = '''
+  xmap ga <Plug>(EasyAlign)
+  nmap ga <Plug>(EasyAlign)
+  '''
+############################################################
+# Easy Align
+############################################################
+[[plugins]]
+repo = 'kg8m/vim-simple-align'
+
+############################################################
+# Which Key
+############################################################
+[[plugins]]
+repo = 'folke/which-key.nvim'
+
+############################################################
+# Window resize
+#   animate.vimは使うと動作がバグるっぽいから一旦disable
+############################################################
+[[plugins]]
+repo = 'camspiers/animate.vim'
+
+[[plugins]]
+repo = 'camspiers/lens.vim'
+depends = 'camspiers/animate.vim'
+hook_add = '''
+  let g:lens#disabled_filetypes = ['nerdtree', 'fzf', 'dapui_watches', 'dapui_breakpoints', 'dapui_stacks', 'dapui_scopes', 'dapui_repl']
+  let g:lens#animate = 0
+  '''
+
+
+############################################################
+# LeetCode
+############################################################
+#[[plugins]]
+#repo = 'ianding1/leetcode.vim'
+#hook_add = '''
+#    source ~/.config/nvim/lua/_leetcode.lua
+#    '''
+
+############################################################
+# Markdown
+############################################################
+#[[plugins]]
+#repo = 'plasticboy/vim-markdown'
+#
+#[[plugins]]
+#repo = 'previm/previm'
+#hook_add = '''
+#    autocmd BufRead,BufNewFile *.md  set filetype=markdown
+#    nnoremap <silent> <Leader>p :PrevimOpen<CR>
+#    let g:vim_markdown_folding_disabled=1
+#    let g:previm_enable_realtime=1
+#'''
+#
+#[[plugins]]
+#repo = 'tyru/open-browser.vim'
+#[[plugins]]
+#repo = 'iamcco/markdown-preview.nvim'
+#hook_add = '''
+#  nnoremap <silent> <C-p> <Plug>MarkdownPreviewToggle<CR>
+#  '''

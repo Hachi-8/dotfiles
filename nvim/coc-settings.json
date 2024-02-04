@@ -1,0 +1,15 @@
+{
+    "coc.preferences.formatOnSave": true,
+    "coc.preferences.formatOnSaveFiletypes": ["typescript", "php", "toml"],
+    "coc.preferences.hoverTarget": "float",
+    "tsserver.tsconfigPath": "~/projects/bizcloud-jbc-dev-env/source/bizcloud-jbc/server/o3/htdocs/typings/core_tsconfig.json",
+    "prettier.singleQuote": true,
+    "intelephense.environment.phpVersion": "7.3",
+    "html.filetypes": [
+        "html",
+        "handlebars",
+        "htmldjango",
+        "blade"
+    ],
+    "Lua.diagnostics.globals" : ["vim"]
+}

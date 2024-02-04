@@ -19,3 +19,10 @@ link starship/starship.toml ~/.config/starship.toml
 # tmux
 link tmux/tmux.conf ~/.tmux.conf
 
+
+# nvim
+link nvim/init.vim ~/.config/nvim/init.vim
+link nvim/coc-settings.json ~/.config/nvim/coc-settings.json
+link nvim/lua ~/.config/nvim/lua
+link nvim/dein.toml ~/.config/nvim/dein.toml
+link nvim/dein_lazy.toml ~/.config/nvim/dein_lazy.toml
