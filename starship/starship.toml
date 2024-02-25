@@ -7,3 +7,9 @@ truncate_to_repo = false
 
 [docker_context]
 format = "via [🐋 $context](blue bold)"
+
+[username]
+style_user = 'bold red'
+format = '\[USER: [$user]($style)\] '
+disabled = false
+show_always = true
