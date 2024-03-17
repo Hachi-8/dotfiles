@@ -22,8 +22,9 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Python 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python3_dir = '/home/linuxbrew/.linuxbrew/bin/'
-let g:python3_host_prog = g:python3_dir . 'python3'
+let s:python3_path = trim(system('which python3'))
+let g:python3_dir = fnamemodify(s:python3_path, ':h')
+let g:python3_host_prog = g:python3_dir . '/python3'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set dein base/source/runtime path (required)
