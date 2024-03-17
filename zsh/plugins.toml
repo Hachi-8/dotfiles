@@ -37,3 +37,6 @@ apply = ['defer']
 
 [plugins.starship]
 inline = 'eval "$(starship init zsh)"'
+
+[plugins.mise]
+inline = 'eval "$(~/.local/bin/mise activate zsh)"'
