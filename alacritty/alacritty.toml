@@ -1,0 +1,20 @@
+[general]
+import = [
+  "/Windows/Users/$USERNAME/AppData/Roaming/alacritty/catppuccin-frappe.toml",
+]
+
+[window]
+decorations = 'Full'
+opacity = 0.9
+decorations_theme_variant = 'dark'
+blur = true
+startup_mode = 'Maximized'
+
+[font]
+# normal = { family = "Consolas", style = "Regular" }
+normal.family = 'HackGen Console NF'
+size = 11
+
+[terminal]
+shell = { program = '/Windows/System32/wsl.exe ~', args = [] }
+osc52 = "CopyPaste"
