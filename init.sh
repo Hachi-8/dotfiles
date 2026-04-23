@@ -1,10 +1,12 @@
 #!/bin/sh
+DOTFILES_DIR=$(cd $(dirname "$0"); pwd)
+
 link() {
   dir_path=$(dirname "$2")
   if [ ! -d "$dir_path" ]; then
     mkdir -p "$dir_path" 
   fi
-  ln -sfv ~/dotfiles/$1 $2
+  ln -sfv "$DOTFILES_DIR/$1" "$2"
 }
 
 # zsh
@@ -42,21 +44,46 @@ link alacritty/alacritty.toml ~/.config/alacritty/alacritty.toml
 if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
   echo "--------------------"
   echo "WSL detected"
-  echo "Do you want to copy alacritty.toml to %APPDATA%/alacritty/alacritty.toml for WSL? [y/n]"
+  echo "Do you want to copy alacritty config files to Windows? [y/n]"
   read input 
 
-  if [ -z $input ] || [ $input = 'no' ] || [ $input = 'NO' ] || [ $input = 'n' ] || [$input = 'N']; then
-    echo "Skip copying alacritty.toml"
-  elif [ $input = 'yes' ] || [ $input = 'YES' ] || [ $input = 'y' ] || [ $input = 'Y' ]; then
-    echo "type your windows username"
-    read username
-    if [ -z $username ]; then
-      echo "Invalid username. Skip copying alacritty.toml"
-      exit 1
-    fi
-    APPDATA="/mnt/c/Users/$username/AppData/Roaming"
-    cp alacritty/alacritty.toml $APPDATA/alacritty/alacritty.toml
-  else
-    echo "Invalid input. Skip copying alacritty.toml"
-  fi
+  case "$input" in
+    [yY][eE][sS]|[yY])
+      # Try to get Windows username automatically
+      win_user=$(cmd.exe /c "echo %USERNAME%" 2>/dev/null | tr -d '\r')
+      if [ -n "$win_user" ]; then
+        echo "Detected Windows username: $win_user. Is this correct? [y/n]"
+        read confirm
+        case "$confirm" in
+          [nN]*)
+            echo "Enter your Windows username:"
+            read win_user
+            ;;
+        esac
+      else
+        echo "Could not detect Windows username. Please enter it:"
+        read win_user
+      fi
+
+      if [ -z "$win_user" ]; then
+        echo "Invalid username. Skip copying alacritty config."
+      else
+        APPDATA="/mnt/c/Users/$win_user/AppData/Roaming"
+        if [ -d "$APPDATA" ]; then
+          mkdir -p "$APPDATA/alacritty"
+          # Copy toml files from alacritty dir
+          for f in "$DOTFILES_DIR"/alacritty/*.toml; do
+            [ -e "$f" ] || continue
+            cp "$f" "$APPDATA/alacritty/$(basename "$f")"
+          done
+          echo "Copied Alacritty config to $APPDATA/alacritty/"
+        else
+          echo "Error: Could not find Windows AppData directory at $APPDATA"
+        fi
+      fi
+      ;;
+    *)
+      echo "Skip copying alacritty config"
+      ;;
+  esac
 fi
