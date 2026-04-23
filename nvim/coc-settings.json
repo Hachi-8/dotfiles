@@ -25,5 +25,6 @@
     "go.goplsPath": "~/.config/coc/extensions/coc-go-data/bin/gopls",
     "go.goplsOptions": {
       "completeUnimported": true
-    }
+    },
+    "snippets.ultisnips.pythonPrompt": false
 }
