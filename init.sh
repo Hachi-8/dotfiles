@@ -6,7 +6,7 @@ link() {
   if [ ! -d "$dir_path" ]; then
     mkdir -p "$dir_path" 
   fi
-  ln -sfv "$DOTFILES_DIR/$1" "$2"
+  ln -sfnv "$DOTFILES_DIR/$1" "$2"
 }
 
 # zsh
