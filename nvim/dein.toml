@@ -157,7 +157,11 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'nvim-neotest/nvim-nio'
+
+[[plugins]]
 repo = 'rcarriga/nvim-dap-ui'
+depends = "nvim-neotest/nvim-nio"
 hook_add = '''
     noremap <silent> <Leader>n :lua require'dapui'.toggle({ reset = true })<CR>
     source ~/.config/nvim/lua/_dapui.lua
