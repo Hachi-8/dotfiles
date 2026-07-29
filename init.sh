@@ -19,6 +19,9 @@ link starship/starship.toml ~/.config/starship.toml
 # tmux
 link tmux/tmux.conf ~/.tmux.conf
 
+# herdr
+link herdr/config.toml ~/.config/herdr/config.toml
+
 
 # nvim
 link nvim/init.vim ~/.config/nvim/init.vim

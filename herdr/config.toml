@@ -1,0 +1,50 @@
+onboarding = false
+# herdr configuration
+# tmux -> herdr migration with matching keybinds.
+
+[keys]
+prefix = "ctrl+t"
+
+# tmux: prefix + s / choose-session
+goto = "ctrl+s"
+
+# tmux: prefix + r / source-file ~/.tmux.conf
+reload_config = "prefix+r"
+
+# tmux: prefix + v / split-window -h
+split_vertical = "prefix+v"
+
+# tmux: prefix + s / split-window -v
+split_horizontal = "prefix+s"
+
+# tmux: prefix + c / new-window
+new_tab = "prefix+c"
+
+# tmux: prefix + x / kill-pane
+close_pane = "prefix+x"
+
+# tmux: prefix + z / resize-pane -Z
+zoom = "prefix+z"
+
+# tmux: prefix + d / detach-client
+detach = "prefix+d"
+
+# tmux: prefix + h/j/k/l + vim-tmux-navigator
+focus_pane_left = "ctrl+h"
+focus_pane_down = "ctrl+j"
+focus_pane_up = "ctrl+k"
+focus_pane_right = "ctrl+l"
+
+# tmux: prefix + p / prefix + n
+previous_tab = "prefix+p"
+next_tab = "prefix+n"
+
+# tmux has no resize-mode equivalent here.
+resize_mode = ""
+
+[ui.sound]
+enabled = false
+
+[theme]
+name = "terminal"
+auto_switch = false
