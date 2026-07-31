@@ -24,7 +24,9 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let s:python3_path = trim(system('which python3'))
 let g:python3_dir = fnamemodify(s:python3_path, ':h')
-let g:python3_host_prog = g:python3_dir . '/python3'
+let s:python3_dir_venv = '~/projects/jobcan-inv/bin'
+" let g:python3_host_prog = g:python3_dir . '/python3'
+let g:python3_host_prog = s:python3_dir_venv . '/python3'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set dein base/source/runtime path (required)
@@ -78,19 +80,20 @@ endif
 " Color Scheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "colorscheme iceberg
+"colorscheme kanagawa
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
 set number
-set cursorline
-set cursorcolumn
+" set cursorline
+" set cursorcolumn
 set hlsearch
 set incsearch
 set smartindent
 set wildmenu " cmd mode filename completion
-set laststatus=2
+" set laststatus=2
 set noshowmode
 set ignorecase
 set expandtab " tab -> spaces
@@ -99,14 +102,17 @@ set shiftwidth=0 " tabstopに従う
 set softtabstop=-1 " shiftwidthに従う
 set completeopt=menuone,noinsert
 set directory=/tmp
-set list
-set listchars=tab:>-,space:.
-set clipboard+=unnamed
+" set list
+" set listchars=tab:>-,space:.
+set clipboard&
+set clipboard+=unnamedplus
 set encoding=UTF-8
 set fileencodings=utf-8,sjis
-set guifont=HackGen\ 12
+set guifont="HackGen Console NF"\ 12
 set foldmethod=manual
 set laststatus=3
+" set ambiwidth=double
+" set termguicolors
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " key mappings
@@ -149,3 +155,29 @@ nnoremap x "_x
 nnoremap d "_d
 nnoremap D "_D
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" php-cs-fixer
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 既にあれば上書
+function! s:php_cs_fixer() abort
+  :r! php-cs-fixer fix % --quiet --config=$HOME/.config/nvim/formatter/php-cs-fixer/.php-cs-fixer.php
+  :e!
+endfunction
+augroup php_cs_fixer
+  autocmd!
+  autocmd BufWritePre *.php let b:save_view = winsaveview()
+  autocmd BufWritePost *.php call s:php_cs_fixer() |
+    \ if exists('b:save_view') | call winrestview(b:save_view) | unlet b:save_view | endif
+augroup END
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" typescriptのパースでテンプレートリテラルを正しく扱うための設定
+" 本当はtypescriptファイルでtsxのパーサを使いたいがうまくいかないため、filetype自体を書き換えることで対応
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" lua << EOF
+" if vim.treesitter.language.register then
+"     vim.treesitter.language.register('tsx', 'typescript')
+" end
+" EOF
+
+autocmd BufNewFile,BufRead *.ts set filetype=typescriptreact

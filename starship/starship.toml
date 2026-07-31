@@ -13,3 +13,7 @@ style_user = 'bold red'
 format = '\[USER: [$user]($style)\] '
 disabled = false
 show_always = true
+
+[time]
+disabled = false
+format = "at [$time]($style)"

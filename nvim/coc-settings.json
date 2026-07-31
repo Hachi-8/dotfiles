@@ -1,15 +1,30 @@
 {
     "coc.preferences.formatOnSave": true,
-    "coc.preferences.formatOnSaveFiletypes": ["typescript", "php", "toml"],
+    "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact", "php", "toml", "sql", "go"],
     "coc.preferences.hoverTarget": "float",
-    "tsserver.tsconfigPath": "~/projects/bizcloud-jbc-dev-env/source/bizcloud-jbc/server/o3/htdocs/typings/core_tsconfig.json",
+
+
+    "prettier.ignoreConfig": true,
     "prettier.singleQuote": true,
+    "prettier.trailingComma": "all",
+    "eslint.enable": false,
+    "typescript.format.enable": false,
+
+
     "intelephense.environment.phpVersion": "7.3",
+
     "html.filetypes": [
         "html",
         "handlebars",
         "htmldjango",
         "blade"
     ],
-    "Lua.diagnostics.globals" : ["vim"]
+
+    "Lua.diagnostics.globals" : ["vim"],
+
+    "go.goplsPath": "~/.config/coc/extensions/coc-go-data/bin/gopls",
+    "go.goplsOptions": {
+      "completeUnimported": true
+    },
+    "snippets.ultisnips.pythonPrompt": false
 }

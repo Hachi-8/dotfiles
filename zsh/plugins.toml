@@ -40,3 +40,6 @@ inline = 'eval "$(starship init zsh)"'
 
 [plugins.mise]
 inline = 'eval "$(~/.local/bin/mise activate zsh)"'
+
+[plugins.zoxide]
+inline = 'eval "$(zoxide init zsh)"'
